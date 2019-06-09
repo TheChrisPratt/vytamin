@@ -1,5 +1,8 @@
 package com.anodyzed.vyta.config;
 
+import com.anodyzed.vyta.resources.CourseResource;
+import com.anodyzed.vyta.resources.StudentResource;
+
 import org.apache.cxf.bus.spring.SpringBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,12 +16,22 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 //@EnableJpaRepositories("com.anodyzed.vyta.repositories")
-@ComponentScan //(excludeFilters=@ComponentScan.Filter(type= FilterType.ANNOTATION,pattern="com.anodyzed.vyta.repositories"))
+@ComponentScan("com.anodyzed.vyta") //(excludeFilters=@ComponentScan.Filter(type= FilterType.ANNOTATION,pattern="com.anodyzed.vyta.repositories"))
 public class AppConfiguration {
 
   @Bean
   public SpringBus springBus () {
     return new SpringBus();
   } //springBus
+
+  @Bean
+  public CourseResource courseResource () {
+    return new CourseResource();
+  } //courseResource
+
+  @Bean
+  public StudentResource studentResource () {
+    return new StudentResource();
+  } //studentResource
 
 } //*AppConfiguration

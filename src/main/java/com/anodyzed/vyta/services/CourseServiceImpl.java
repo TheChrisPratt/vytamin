@@ -5,6 +5,8 @@ import com.anodyzed.vyta.model.Course;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,9 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service("courseService")
 public class CourseServiceImpl implements CourseService {
+  private static final Logger log = LoggerFactory.getLogger(CourseServiceImpl.class);
+
   private Map<Long,Course> courses;
 
   public CourseServiceImpl () {
+    log.info("Constructing Course Service");
     courses = new HashMap<>();
     Course course1 = new Course();
     Course course2 = new Course();

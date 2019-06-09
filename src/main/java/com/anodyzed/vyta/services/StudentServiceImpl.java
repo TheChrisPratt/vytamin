@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
  */
 @Service("studentService")
 public class StudentServiceImpl implements StudentService {
+  private static final Logger log = LoggerFactory.getLogger(StudentServiceImpl.class);
+
   @Autowired
   private CourseService courseService;
 
@@ -25,6 +29,8 @@ public class StudentServiceImpl implements StudentService {
   private Map<Long,Student> students;
 
   public StudentServiceImpl () {
+    log.info("Constructing Student Service");
+    log.info("CourseService is {}",(courseService != null) ? "not null" : "null");
     students = new HashMap<>();
     Course course = courseService.getById(1);
     Student student1 = new Student();
