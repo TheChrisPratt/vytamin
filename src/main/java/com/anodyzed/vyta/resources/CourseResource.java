@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * CourseResource
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Path("/course")
 @Produces("text/xml")
+@Component("courseResource")
 public class CourseResource {
   @Autowired
   private CourseService courseService;

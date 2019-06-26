@@ -1,6 +1,8 @@
 <configuration>
+  <property name="home" value="E:/proj/vytamin"/>
+
   <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>E:/proj/vytamin/logs/debug.log</file>
+    <file>${home}/logs/debug.log</file>
     <append>false</append>
     <immediateFlush>true</immediateFlush>
     <encoder>
@@ -8,7 +10,10 @@
     </encoder>
   </appender>
 
-  <root level="debug">
+  <logger level="trace" additivity="false" name="com.anodyzed.vyta"><appender-ref ref="FILE"/></logger>
+  <logger level="trace" additivity="false" name="org.springframework"><appender-ref ref="FILE"/></logger>
+
+  <root level="info">
     <appender-ref ref="FILE"/>
   </root>
 </configuration>

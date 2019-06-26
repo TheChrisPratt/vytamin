@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * StudentResource
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Path("/student")
 @Produces("text/xml")
+@Component("studentResource")
 public class StudentResource {
   @Autowired
   private StudentService studentService;
@@ -31,7 +33,7 @@ public class StudentResource {
   @Path("/{studentId}")
   public Student getStudent (@PathParam("studentId") long studentId) {
     return studentService.getById(studentId);
-  }  //getStudent
+  } //getStudent
 
   @POST
   public Response createStudent (Student student) {

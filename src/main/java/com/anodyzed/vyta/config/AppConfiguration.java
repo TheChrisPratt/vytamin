@@ -1,8 +1,5 @@
 package com.anodyzed.vyta.config;
 
-import com.anodyzed.vyta.resources.CourseResource;
-import com.anodyzed.vyta.resources.StudentResource;
-
 import org.apache.cxf.bus.spring.SpringBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,14 +21,14 @@ public class AppConfiguration {
     return new SpringBus();
   } //springBus
 
-  @Bean
-  public CourseResource courseResource () {
-    return new CourseResource();
-  } //courseResource
-
-  @Bean
-  public StudentResource studentResource () {
-    return new StudentResource();
-  } //studentResource
+//  @Bean
+//  public CourseResource courseResource () {
+//    return new CourseResource();
+//  } //courseResource
+//
+//  @Bean
+//  public StudentResource studentResource () {
+//    return new StudentResource();
+//  } //studentResource
 
 } //*AppConfiguration
