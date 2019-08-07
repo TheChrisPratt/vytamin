@@ -1,9 +1,13 @@
 package com.anodyzed.vyta.config;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+
 import org.apache.cxf.bus.spring.SpringBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
  * AppConfiguration
@@ -14,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 //@EnableJpaRepositories("com.anodyzed.vyta.repositories")
 @ComponentScan("com.anodyzed.vyta") //(excludeFilters=@ComponentScan.Filter(type= FilterType.ANNOTATION,pattern="com.anodyzed.vyta.repositories"))
+@PropertySource({"classpath:application.properties"})
 public class AppConfiguration {
 
   @Bean
@@ -21,14 +26,14 @@ public class AppConfiguration {
     return new SpringBus();
   } //springBus
 
-//  @Bean
-//  public CourseResource courseResource () {
-//    return new CourseResource();
-//  } //courseResource
-//
-//  @Bean
-//  public StudentResource studentResource () {
-//    return new StudentResource();
-//  } //studentResource
+  @Bean
+  public JacksonJsonProvider jsonProvider () {
+    return new JacksonJsonProvider();
+  } //jsonProvider
+
+  @Bean
+  public static PropertySourcesPlaceholderConfigurer propertyConfigurer () {
+    return new PropertySourcesPlaceholderConfigurer();
+  } //propertyConfigurer
 
 } //*AppConfiguration

@@ -14,7 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
+import static javax.ws.rs.core.MediaType.TEXT_XML;
 
 /**
  * StudentResource
@@ -23,8 +25,9 @@ import org.springframework.stereotype.Component;
  * @since 2019-05-25
  */
 @Path("/student")
-@Produces("text/xml")
-@Component("studentResource")
+//@Produces(APPLICATION_JSON)
+@Produces(TEXT_XML)
+@Controller("studentResource")
 public class StudentResource {
   @Autowired
   private StudentService studentService;

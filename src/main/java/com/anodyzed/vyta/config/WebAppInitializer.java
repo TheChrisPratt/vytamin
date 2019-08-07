@@ -20,7 +20,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
     AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
     context.register(AppConfiguration.class);
     container.addListener(new ContextLoaderListener(context));
-    container.addServlet("dispatcher",new CXFServlet()).addMapping("/api");
+    container.addServlet("cxf",new CXFServlet()).addMapping("/api/*");
   } //onStartup
   
 } //*WebAppInitializer

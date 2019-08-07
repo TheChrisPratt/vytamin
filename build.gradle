@@ -12,17 +12,18 @@ repositories {
 }
 
 dependencies {
-  runtime group: 'ch.qos.logback',            name: 'logback-classic',              version: project.properties['logback.version']
-  compile group: 'javax.servlet',             name: 'javax.servlet-api',            version: project.properties['servlet.version']
-  compile group: 'org.apache.cxf',            name: 'cxf-rt-frontend-jaxrs',        version: project.properties['cxf.version']
-  compile group: 'org.apache.cxf',            name: 'cxf-rt-transports-http-jetty', version: project.properties['cxf.version']
-  compile group: 'org.slf4j',                 name: 'slf4j-api',                    version: project.properties['slf4j.version']
-//  compile group: 'org.slf4j',                 name: 'slf4j-simple',                 version: project.properties['slf4j.version']
-  compile group: 'org.springframework',       name: 'spring-context',               version: project.properties['spring.version']
-  compile group: 'org.springframework',       name: 'spring-webmvc',                version: project.properties['spring.version']
-  compile group: 'org.springframework.data',  name: 'spring-data-jpa',              version: project.properties['spring-data.version']
+  runtime group: 'ch.qos.logback',              name: 'logback-classic',              version: project.properties['logback.version']
+  compile group: 'javax.servlet',               name: 'javax.servlet-api',            version: project.properties['servlet.version']
+  compile group: 'org.apache.cxf',              name: 'cxf-rt-frontend-jaxrs',        version: project.properties['cxf.version']
+  compile group: 'org.apache.cxf',              name: 'cxf-rt-transports-http-jetty', version: project.properties['cxf.version']
+  compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider',  version: project.properties['jackson.version']
+  compile group: 'org.slf4j',                   name: 'slf4j-api',                    version: project.properties['slf4j.version']
+//  compile group: 'org.slf4j',                   name: 'slf4j-simple',                 version: project.properties['slf4j.version']
+  compile group: 'org.springframework',         name: 'spring-context',               version: project.properties['spring.version']
+  compile group: 'org.springframework',         name: 'spring-webmvc',                version: project.properties['spring.version']
+  compile group: 'org.springframework.data',    name: 'spring-data-jpa',              version: project.properties['spring-data.version']
 
-  compile group: 'org.apache.httpcomponents', name: 'httpclient',                   version: project.properties['httpclient.version']
+  compile group: 'org.apache.httpcomponents',   name: 'httpclient',                   version: project.properties['httpclient.version']
 
-  testCompile group: 'junit',                 name: 'junit',                        version: project.properties['junit.version']
+  testCompile group: 'junit',                   name: 'junit',                        version: project.properties['junit.version']
 }
