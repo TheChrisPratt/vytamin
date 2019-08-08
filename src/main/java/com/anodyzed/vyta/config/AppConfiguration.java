@@ -36,4 +36,9 @@ public class AppConfiguration {
     return new PropertySourcesPlaceholderConfigurer();
   } //propertyConfigurer
 
+  @Bean
+  public static PropertiesAccessor propertyAccessor () {
+    return new PropertiesAccessor();
+  } //propertyAccessor
+
 } //*AppConfiguration

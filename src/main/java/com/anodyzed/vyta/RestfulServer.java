@@ -1,6 +1,7 @@
 package com.anodyzed.vyta;
 
 import com.anodyzed.vyta.config.AppConfiguration;
+import com.anodyzed.vyta.config.PropertiesAccessor;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import java.util.ArrayList;
@@ -75,12 +76,13 @@ public class RestfulServer {
   public static void main (String... args) {
     log.info("Starting Server...");
     ctx = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    PropertiesAccessor props = ctx.getBean("propertyAccessor",PropertiesAccessor.class);
     JAXRSServerFactoryBean factoryBean = new JAXRSServerFactoryBean();
     factoryBean.setBus((SpringBus)ctx.getBean("springBus"));
     factoryBean.setServiceBeans(getServices());
     factoryBean.setResourceProviders(getProviders());
     factoryBean.setExtensionMappings(getExtensionMappings());
-    factoryBean.setAddress("http://localhost:8888/api");
+    factoryBean.setAddress(props.get("server.url"));
     Server server = factoryBean.create();
     log.info("Server Startup Complete: {}",server.getDestination());
   } //main
