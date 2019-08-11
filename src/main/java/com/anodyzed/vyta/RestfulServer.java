@@ -2,7 +2,6 @@ package com.anodyzed.vyta;
 
 import com.anodyzed.vyta.config.AppConfiguration;
 import com.anodyzed.vyta.config.PropertiesAccessor;
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +47,7 @@ public class RestfulServer {
   private static List<Object> getProviders () {
     if(providers == null) {
       providers = new ArrayList<>();
-      providers.add(ctx.getBean(JacksonJsonProvider.class));
+      providers.add(ctx.getBean("jsonProvider"));
 //      providers.add(new ExceptionRestHandler());
 //      Controller controller;
 //      SpringResourceFactory provider;
@@ -65,6 +64,7 @@ public class RestfulServer {
   } //getProviders
 
   private static List<Feature> getFeatures () {
+//    return Collections.singletonList(new LoggingFeature());
     return Collections.emptyList();
   } //getFeatures
 
