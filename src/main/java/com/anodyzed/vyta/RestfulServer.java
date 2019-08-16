@@ -2,6 +2,7 @@ package com.anodyzed.vyta;
 
 import com.anodyzed.vyta.config.AppConfiguration;
 import com.anodyzed.vyta.config.PropertiesAccessor;
+import com.anodyzed.vyta.config.SecurityConfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Controller;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 
 /**
  * RestfulServer
@@ -48,6 +50,7 @@ public class RestfulServer {
     if(providers == null) {
       providers = new ArrayList<>();
       providers.add(ctx.getBean("jsonProvider"));
+      providers.add(ctx.getBean("jaxbXmlProvider"));
 //      providers.add(new ExceptionRestHandler());
 //      Controller controller;
 //      SpringResourceFactory provider;
@@ -71,15 +74,15 @@ public class RestfulServer {
   private static Map<Object,Object> getExtensionMappings () {
     if(extensionMappings == null) {
       extensionMappings = new HashMap<>();
-//      extensionMappings.put("xml",TEXT_XML);
+      extensionMappings.put("xml",APPLICATION_XML);
       extensionMappings.put("json",APPLICATION_JSON);
     }
     return extensionMappings;
   } //getExtensionMappings
 
   public static void main (String... args) {
-    log.info("Starting Server...");
-    ctx = new AnnotationConfigApplicationContext(AppConfiguration.class);
+    log.info("--==<<(( Starting Server... ))>>==-----");
+    ctx = new AnnotationConfigApplicationContext(AppConfiguration.class,SecurityConfig.class/*,PersistenceConfig.class*/);
     PropertiesAccessor props = ctx.getBean("propertyAccessor",PropertiesAccessor.class);
     JAXRSServerFactoryBean factoryBean = new JAXRSServerFactoryBean();
     factoryBean.setBus((SpringBus)ctx.getBean("springBus"));
@@ -89,7 +92,7 @@ public class RestfulServer {
     factoryBean.setExtensionMappings(getExtensionMappings());
     factoryBean.setAddress(props.get("server.url"));
     Server server = factoryBean.create();
-    log.info("Server Startup Complete: {}",server.getDestination());
+    log.info("--==<<(( Server Startup Complete: {} ))>>==-----",server.getDestination().getAddress());
   } //main
 
 } //*RestfulServer

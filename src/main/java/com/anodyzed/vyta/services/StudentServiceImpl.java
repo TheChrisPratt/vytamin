@@ -32,8 +32,8 @@ public class StudentServiceImpl implements StudentService {
   private void init () {
     if(!initialized) {
       initialized = true;
-      log.info("Initializing Student Service");
-      log.info("CourseService is {}",(courseService != null) ? "not null" : "null");
+      log.trace("--==<<(( Initializing Student Service ))>>==-----");
+      log.trace("--==<<(( CourseService is {} ))>>==-----",(courseService != null) ? "not null" : "null");
       students = new HashMap<>();
       Course course = courseService.getById(1);
       Student student1 = new Student();

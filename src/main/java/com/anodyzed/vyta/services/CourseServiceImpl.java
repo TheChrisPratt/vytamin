@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
   private Map<Long,Course> courses;
 
   public CourseServiceImpl () {
-    log.info("Constructing Course Service");
+    log.trace("--==<<(( Constructing Course Service ))>>==-----");
     courses = new HashMap<>();
     Course course1 = new Course();
     Course course2 = new Course();
