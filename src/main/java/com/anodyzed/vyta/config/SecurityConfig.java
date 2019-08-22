@@ -44,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        .oauth2Login()
 //        .openidLogin()
 //        .rememberMe()
-        .authorizeRequests().antMatchers("/**").authenticated()
+//        .authorizeRequests().antMatchers("/**").authenticated()
+        .authorizeRequests().anyRequest().authenticated()
         .and().httpBasic()
         .and().csrf().disable();
   } //configure

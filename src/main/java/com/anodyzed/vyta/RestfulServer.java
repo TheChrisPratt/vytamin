@@ -1,8 +1,6 @@
 package com.anodyzed.vyta;
 
-import com.anodyzed.vyta.config.AppConfiguration;
 import com.anodyzed.vyta.config.PropertiesAccessor;
-import com.anodyzed.vyta.config.SecurityConfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,16 +30,15 @@ import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 public class RestfulServer {
   private static final Logger log = LoggerFactory.getLogger(RestfulServer.class);
 
-  private static ApplicationContext ctx;
+  private static ApplicationContext context;
 
   private static List<Object> services;
-//  private static final List<Class<?>> providerClasses = Arrays.asList(JacksonJsonProvider.class);
   private static List<Object> providers;
   private static Map<Object,Object> extensionMappings;
 
   private static List<Object> getServices () {
     if(services == null) {
-      services = new ArrayList<>(ctx.getBeansWithAnnotation(Controller.class).values());
+      services = new ArrayList<>(context.getBeansWithAnnotation(Controller.class).values());
     }
     return services;
   } //getServices
@@ -49,21 +46,10 @@ public class RestfulServer {
   private static List<Object> getProviders () {
     if(providers == null) {
       providers = new ArrayList<>();
-      providers.add(ctx.getBean("jsonProvider"));
-      providers.add(ctx.getBean("jaxbXmlProvider"));
-//      providers.add(new ExceptionRestHandler());
-//      Controller controller;
-//      SpringResourceFactory provider;
-//      for(Class<?> providerClass : providerClasses) {
-//        if((controller = providerClass.getAnnotation(Controller.class)) != null) {
-//          provider = new SpringResourceFactory(controller.value());
-//          provider.setApplicationContext(ctx);
-//          providers.add(provider);
-//        }
-//      }
+      providers.add(context.getBean("jsonProvider"));
+      providers.add(context.getBean("jaxbXmlProvider"));
     }
     return providers;
-//    return new SingletonResourceProvider(ctx.getBean(CourseResource.class));
   } //getProviders
 
   private static List<Feature> getFeatures () {
@@ -82,17 +68,17 @@ public class RestfulServer {
 
   public static void main (String... args) {
     log.info("--==<<(( Starting Server... ))>>==-----");
-    ctx = new AnnotationConfigApplicationContext(AppConfiguration.class,SecurityConfig.class/*,PersistenceConfig.class*/);
-    PropertiesAccessor props = ctx.getBean("propertyAccessor",PropertiesAccessor.class);
+    context = new AnnotationConfigApplicationContext("com.anodyzed.vyta.config");
+    PropertiesAccessor props = context.getBean("propertyAccessor",PropertiesAccessor.class);
     JAXRSServerFactoryBean factoryBean = new JAXRSServerFactoryBean();
-    factoryBean.setBus((SpringBus)ctx.getBean("springBus"));
+    factoryBean.setBus(context.getBean("springBus",SpringBus.class));
     factoryBean.setServiceBeans(getServices());
     factoryBean.setProviders(getProviders());
     factoryBean.setFeatures(getFeatures());
     factoryBean.setExtensionMappings(getExtensionMappings());
     factoryBean.setAddress(props.get("server.url"));
     Server server = factoryBean.create();
-    log.info("--==<<(( Server Startup Complete: {} ))>>==-----",server.getDestination().getAddress());
+    log.info("--==<<(( Server Startup Complete: {} ))>>==-----",server.getDestination().getAddress().getAddress().getValue());
   } //main
 
 } //*RestfulServer

@@ -22,10 +22,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
   public void onStartup (ServletContext container) {
     log.trace("--==<<(( Web App Initializing ))>>==-----");
     AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-    context.register(AppConfiguration.class,SecurityConfig.class/*,PersistenceConfig.class*/);
+    context.scan("com.anodyzed.vyta.config");
     container.addListener(new ContextLoaderListener(context));
-    container.addServlet("cxf",new CXFServlet()).addMapping("/api/*");
-//    container.addFilter("springSecurityFilterChain",new DelegatingFilterProxy()).addMappingForServletNames(EnumSet.of(REQUEST,FORWARD,INCLUDE,ERROR),false,"cxf");
+    container.addServlet("cxf",new CXFServlet()).addMapping("/api");
     context.refresh();
   } //onStartup
   
