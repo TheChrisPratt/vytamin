@@ -19,6 +19,7 @@ dependencies {
   compile group: 'org.apache.cxf',              name: 'cxf-rt-transports-http',       version: project.properties['cxf.version']
   compile group: 'org.apache.cxf',              name: 'cxf-rt-transports-http-jetty', version: project.properties['cxf.version']
   compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider',  version: project.properties['jackson.version']
+  compile group: 'org.jetbrains',               name: 'annotations',                  version: project.properties['jetbrains.version']
   compile group: 'org.slf4j',                   name: 'slf4j-api',                    version: project.properties['slf4j.version']
 //  compile group: 'org.slf4j',                   name: 'slf4j-simple',                 version: project.properties['slf4j.version']
   compile group: 'org.springframework',         name: 'spring-core',                  version: project.properties['spring.version']
