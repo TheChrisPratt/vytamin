@@ -2,6 +2,7 @@ package com.anodyzed.vyta.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,12 +24,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
+//  @Autowired
+//  private AuthenticationProvider authenticationProvider;
+
+//  @Bean
+//  @Override
+//  public AuthenticationManager authenticationManagerBean () throws Exception {
+//    log.trace("--==<<(( Getting the Authentication Manager Bean ))>>==-----");
+//    return super.authenticationManagerBean();
+//  } //authenticationManagerBean
+
+//  @Bean
+//  public UserDetailsService userDetailsService () {
+//    return new UserDetailsServiceImpl();
+//  } //userDetailsService
+
+  @Bean
+  public PasswordEncoder passwordEncoder () {
+    log.trace("--==<<(( Getting Password Encoder ))>>==-----");
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  } //passwordEncoder
+
   @Override
   public void configure (AuthenticationManagerBuilder auth) throws Exception {
     super.configure(auth);
     log.trace("--==<<(( Configuring Authentication Manager ))>>==-----");
-    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    auth.inMemoryAuthentication().withUser("bob").password(encoder.encode("{noop}bobpassword")).roles("USER")
+    PasswordEncoder encoder = passwordEncoder();
+    auth
+//        .authenticationProvider(authenticationProvider)
+        .inMemoryAuthentication().withUser("bob").password(encoder.encode("{noop}bobpassword")).roles("USER")
                            .and().withUser("fred").password(encoder.encode("{noop}fredpassword")).roles("ADMIN","USER");
   } //configure
 
