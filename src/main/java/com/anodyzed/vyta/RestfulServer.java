@@ -48,6 +48,7 @@ public class RestfulServer {
       providers = new ArrayList<>();
       providers.add(context.getBean("jsonProvider"));
       providers.add(context.getBean("jaxbXmlProvider"));
+      providers.add(context.getBean("authenticationExceptionMapper"));
     }
     return providers;
   } //getProviders
